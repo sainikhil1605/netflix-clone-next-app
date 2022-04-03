@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import magic from "../lib/magic-client";
@@ -53,16 +54,18 @@ const Login = () => {
 
       <header className={styles.header}>
         <div className={styles.headerWrapper}>
-          <a className={styles.logoLink} href="/">
-            <div className={styles.logoWrapper}>
-              <Image
-                src="/static/netflix.svg"
-                alt="Netflix logo"
-                width="128px"
-                height="34px"
-              />
-            </div>
-          </a>
+          <Link href="/" passHref>
+            <a className={styles.logoLink}>
+              <div className={styles.logoWrapper}>
+                <Image
+                  src="/static/netflix.svg"
+                  alt="Netflix logo"
+                  width="128px"
+                  height="34px"
+                />
+              </div>
+            </a>
+          </Link>
         </div>
       </header>
 
