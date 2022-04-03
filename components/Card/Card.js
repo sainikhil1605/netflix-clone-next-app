@@ -24,6 +24,7 @@ const Card = (props) => {
           alt="Netflix Logo"
           layout="fill"
           onError={handleOnError}
+          className={styles.cardImg}
         />
       </motion.div>
     </div>

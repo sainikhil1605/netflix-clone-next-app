@@ -5,24 +5,37 @@ import Modal from "react-modal";
 import DisLike from "../../components/icons/dislike-icon";
 import Like from "../../components/icons/like-icon";
 import NavBar from "../../components/Nav/Navbar";
+import { getVideoDetails } from "../../lib/videos";
 import styles from "../../styles/Video.module.css";
 Modal.setAppElement("#__next");
-const Video = (props) => {
+
+export async function getStaticProps({ params }) {
+  const video = await getVideoDetails(params.videoId);
+  return {
+    props: {
+      video: video?.[0] ?? {},
+    },
+    revalidate: 30,
+  };
+}
+export async function getStaticPaths() {
+  const listOfVideos = ["CEOc2bGV3j8", "a-lbjsu1jgc", "eDm2o1x1T6o"];
+  const paths = listOfVideos.map((videoId) => ({
+    params: { videoId },
+  }));
+  return {
+    paths,
+    fallback: "blocking",
+  };
+}
+const Video = ({ video }) => {
   const router = useRouter();
   const { videoId } = router.query;
   const handleToggleLike = () => {};
   const handleToggleDislike = () => {};
   const [toggleLike, setToggleLike] = useState(false);
   const [toggleDisLike, setToggleDisLike] = useState(false);
-  const video = {
-    title: "The Best of The Week",
-    publishTime: "2020-05-01",
-    description: "Test",
-    channelTitle: "The Best of The Week",
-    statistics: {
-      viewCount: "1,000,000",
-    },
-  };
+
   const {
     title,
     publishTime,
