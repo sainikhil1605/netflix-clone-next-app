@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@magic-sdk/admin": "^1.4.0",
+    "atob": "^2.1.2",
     "classnames": "^2.3.1",
     "cookie": "^0.4.2",
     "framer-motion": "^6.2.8",

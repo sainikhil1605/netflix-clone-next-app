@@ -1,3 +1,4 @@
+import atob from "atob";
 import jwt from "jsonwebtoken";
 import { setTokenCookie } from "../../lib/cookies";
 import { createNewUser, isNewuser } from "../../lib/db/hasura";
@@ -5,6 +6,7 @@ import { magicAdmin } from "../../lib/magic-server";
 export default async function login(req, res) {
   if (req.method === "POST") {
     try {
+      globalThis.atob = atob;
       const auth = req.headers.authorization;
       const didToken = auth ? auth.substr(7) : "";
       const metaData = await magicAdmin.users.getMetadataByToken(didToken);
