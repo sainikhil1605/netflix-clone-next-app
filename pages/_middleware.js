@@ -1,10 +1,13 @@
-import jwt from "jsonwebtoken";
+import jwt from "@tsndr/cloudflare-worker-jwt";
 import { NextResponse } from "next/server";
-export function middleware(req, res) {
+export async function middleware(req, res) {
   const token = req ? req.cookies?.token : null;
-  const userId = jwt.decode(token, process.env.JWT_SECRET)?.issuer;
-  const { pathname } = req.nextUrl;
 
+  const { pathname } = req.nextUrl;
+  let userId = undefined;
+  if (token) {
+    userId = await jwt.decode(token, process.env.JWT_SECRET)?.issuer;
+  }
   if (
     (token && userId) ||
     pathname.includes("/api/login") ||
@@ -12,6 +15,7 @@ export function middleware(req, res) {
   ) {
     return NextResponse.next();
   }
+
   if (!token && pathname !== "/login") {
     const url = req.nextUrl.clone();
     url.pathname = "/login";
