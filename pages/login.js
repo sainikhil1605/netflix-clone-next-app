@@ -29,7 +29,21 @@ const Login = () => {
           email,
         });
         if (didToken) {
-          router.push("/");
+          const resp = await fetch("/api/login", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${didToken}`,
+              "Content-Type": "application/json",
+            },
+          });
+          const loggedInResp = await resp.json();
+          console.log(loggedInResp);
+          if (loggedInResp.done) {
+            router.push("/");
+          } else {
+            setIsLoading(false);
+            setUserMsg("Something went wrong. Please try again.");
+          }
         }
       } catch (err) {
         console.log(err);

@@ -12,6 +12,7 @@ const Banner = (props) => {
   return (
     <div className={styles.container}>
       <div className={styles.leftWrapper}>
+        {/* <div className={styles.horizontalGradient}> */}
         <div className={styles.left}>
           <div className={styles.nseriesWrapper}>
             <p className={styles.firstLetter}>N</p>
@@ -32,6 +33,7 @@ const Banner = (props) => {
             </button>
           </div>
         </div>
+        {/* </div>/ */}
       </div>
       <div
         className={styles.bannerImg}

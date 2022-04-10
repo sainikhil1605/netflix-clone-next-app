@@ -12,6 +12,8 @@ const NavBar = (props) => {
     const getEmail = async () => {
       try {
         const { email } = await magic.user.getMetadata();
+        const didToken = await magic.user.getIdToken();
+        // console.log(didToken);
         setUsername(email);
       } catch (err) {
         console.log(err);
