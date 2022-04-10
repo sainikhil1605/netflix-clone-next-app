@@ -37,7 +37,7 @@ const Login = () => {
             },
           });
           const loggedInResp = await resp.json();
-          console.log(loggedInResp);
+          // console.log(loggedInResp);
           if (loggedInResp.done) {
             router.push("/");
           } else {

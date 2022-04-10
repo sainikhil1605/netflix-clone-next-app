@@ -27,11 +27,12 @@ const NavBar = (props) => {
   };
   const handleOnClickMyList = (e) => {
     e.preventDefault();
-    router.push("/browe/my-list");
+    router.push("/browse/my-list");
   };
   const handleSignOut = async () => {
     try {
       await magic.user.logout();
+      await fetch("/api/logout");
     } catch (err) {
       console.log(err);
     }

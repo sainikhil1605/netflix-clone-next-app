@@ -3,16 +3,26 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import styles from "./card.module.css";
 const Card = (props) => {
-  const { imgUrl = "/static/clifford.webp", size = "medium", id } = props;
+  const {
+    imgUrl = "/static/clifford.webp",
+    size = "medium",
+    id,
+    shouldScale,
+  } = props;
   const classMap = {
     large: styles.lgItem,
     medium: styles.mdItem,
     small: styles.smItem,
   };
   const handleOnError = () => {
-    console.log("error");
+    // console.log("error");
   };
-  const scale = id === 0 ? { scaleY: 1.1 } : { scale: 1.1 };
+  const scale = shouldScale
+    ? id === 0
+      ? { scaleY: 1.1 }
+      : { scale: 1.1 }
+    : {};
+
   return (
     <div className={styles.container}>
       <motion.div
