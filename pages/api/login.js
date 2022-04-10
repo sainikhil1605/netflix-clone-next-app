@@ -9,7 +9,7 @@ export default async function login(req, res) {
       const metaData = await magicAdmin.users.getMetadataByToken(didToken);
       // console.log({ metaData });
       const { issuer } = metaData;
-      console.log(metaData);
+
       const token = jwt.sign(
         {
           ...metaData,
