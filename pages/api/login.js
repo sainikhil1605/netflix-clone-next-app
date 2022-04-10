@@ -5,7 +5,8 @@ import { magicAdmin } from "../../lib/magic-server";
 export default async function login(req, res) {
   if (req.method === "POST") {
     try {
-      const didToken = req.headers.authorization.split(" ")[1];
+      const auth = req.headers.authorization;
+      const didToken = auth ? auth.substr(7) : "";
       const metaData = await magicAdmin.users.getMetadataByToken(didToken);
       // console.log({ metaData });
       const { issuer } = metaData;
